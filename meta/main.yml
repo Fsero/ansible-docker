@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  author: Chris Spicer
+  description: Ansible role for setting up a Docker host
+  license: MIT
+  min_ansible_version: 1.8
+  platforms:
+    - name: Debian
+      versions:
+        - jessie
+    - name: Ubuntu
+      versions:
+        - trusty
+  categories:
+    - development
+    - packaging
+    - system
+dependencies:
+  - role: apt
+    apt_repo:
+      - repo_url: "deb https://get.docker.io/ubuntu docker main"
+        key_id: "A88D21E9"
+        key_url: "https://get.docker.io/gpg"
