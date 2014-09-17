@@ -1,36 +1,54 @@
 # docker
 
-Ansible role for setting up a Docker host. Follows official Docker installation documentation for [Debian](https://docs.docker.com/installation/debian/#debian-jessie-8-64-bit) and [Ubuntu](https://docs.docker.com/installation/ubuntulinux/#ubuntu-trusty-1404-lts-64-bit), expects relatively up-to-date Linux kernel (3.8+). Although it is possible to install on older releases, for simplicity this role focuses on "out of the box" supported "Debian-family" distros.
+Ansible role for setting up a Docker host. Installs Docker via the official Docker Ubuntu apt repository on both Ubuntu and Debian. For simplicity this role focuses on releases that have newer kernels and work out of the box with the official [Ubuntu install guide](https://docs.docker.com/installation/ubuntulinux/#ubuntu-trusty-1404-lts-64-bit) and repository.
 
 ## Requirements
 
-Ubuntu 14.04 'trusty' or Debian 8.0 'jessie'.
+* Ansible 1.8+
+* Ubuntu 14.04 'trusty', Debian 8.0 'jessie' or newer
 
 ## Dependencies
 
-[apt](https://github.com/cspicer/ansible-apt)
-
-## Platforms
-
-### Debian
-
-* jessie
-
-### Ubuntu
-
-* trusty
+###[apt](https://github.com/cspicer/ansible-apt)
+Apt role is called as a dependency to add official Docker repo and signing key then update apt cache.
 
 ## Variables
 
 See [`defaults/main.yml`](defaults/main.yml) for default values.
 
+### docker
+
+These variables should be set either as a dependency in `meta/main.yml` for your role, or as a part of your include statement. See below for examples.
+
+Variable        | Type        | Description
+--------        | ----        | -----------
+apt_pkg         | List        | List of apt packages to be installed
+
 ## Tasks
 
-### debian
+### main
 
-### ubuntu
+- Fail on unsupported releases of Debian and Ubuntu
+- Install Docker from official apt repository
+
+## Testing
+
+This role can be tested via [Vagrant](https://github.com/mitchellh/vagrant) and includes a Vagrantfile and `ansible-galaxy` `requirements.yml` file to resolve any external dependencies.
+
+External role dependencies are copied into `vagrant/roles` which is configured in [`ansible.cfg`](ansible.cfg) as a `roles_path`.
+
+To bring up a test VM:
+* Download dependencies with ansible-galaxy: `ansible-galaxy install -r requirements.yml`
+* Launch the Vagrantfile: `vagrant up`
 
 ## Examples
+
+Add to your playbook as a role include:
+
+    ---
+    - hosts: docker-hosts
+      roles:
+        - ansible-docker
 
 ## Development
 
