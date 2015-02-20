@@ -1,4 +1,6 @@
 ---
 - hosts: all
+  sudo: yes
   roles:
-    - ansible-docker
+    - role: ansible-docker
+    - role: ansible-supervisor
