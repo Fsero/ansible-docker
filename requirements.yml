@@ -1,3 +1,6 @@
-- src: https://github.com/cspicer/ansible-apt
-  name: apt
-  path: vagrant/roles/
+---
+- src: https://github.com/cspicer/ansible-apt.git
+  path: .vagrant/provisioners/ansible/roles/
+
+- src: https://github.com/cspicer/ansible-supervisor.git
+  path: .vagrant/provisioners/ansible/roles/
