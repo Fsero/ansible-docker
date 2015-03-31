@@ -1,4 +1,4 @@
 ---
-docker:
-  apt_pkg:
-    - lxc-docker
+docker_pkg:
+  - lxc-docker
+docker_service: docker
