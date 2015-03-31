@@ -1,10 +1,7 @@
 ---
-# - name: main | check if release version is supported
-#   fail:
-#     msg="{{ ansible_distribution_release }} {{ ansible_distribution_version }} is not a supported release for this role."
-#   when: ansible_distribution_version | version_compare('14.04', '>=')
-
 - name: main | install docker packages
-  apt: pkg={{ item }} state=latest
-  with_items: docker.apt_pkg
+  apt:
+    pkg="{{ item }}"
+    state='latest'
+  with_items: docker_pkg
   notify: start docker
