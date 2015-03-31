@@ -3,4 +3,3 @@
   sudo: yes
   roles:
     - role: ansible-docker
-    - role: ansible-supervisor
