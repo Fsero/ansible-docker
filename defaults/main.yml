@@ -1,4 +1,4 @@
 ---
 docker_pkg:
-  - lxc-docker
+  - docker-engine
 docker_service: docker
