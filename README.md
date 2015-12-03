@@ -1,16 +1,16 @@
 # docker
 
-Ansible role for setting up a Docker host. Installs Docker via the official Docker Ubuntu apt repository on both Ubuntu and Debian. For simplicity this role focuses on releases that have newer kernels and work out of the box with the official [Ubuntu install guide](https://docs.docker.com/installation/ubuntulinux/#ubuntu-trusty-1404-lts-64-bit) and repository.
+Ansible role for setting up a Docker host. Installs Docker via the official Docker apt repositories on both Ubuntu and Debian. This role assumes a 64-bit installation and a kernel supported by Docker. See the Docker install guides for [Debian](http://docs.docker.com/engine/installation/debian/) or [Ubuntu](http://docs.docker.com/engine/installation/ubuntulinux/) for more info.
 
 ## Requirements
 
-* Ansible 1.8+
-* Ubuntu 14.04 'trusty', Debian 8.0 'jessie' or newer
+* Ansible 1.9+
+* Debian 8.0 'jessie' / Ubuntu 14.04 'trusty' or newer
 
 ## Dependencies
 
 ###[apt](https://github.com/cspicer/ansible-apt)
-Apt role is called as a dependency to add official Docker repo and signing key then update apt cache.
+The `apt` role is used to add the official Docker repo along with signing keys. It also manages the apt cache.
 
 ## Variables
 
@@ -22,7 +22,7 @@ These variables should be set either as a dependency in `meta/main.yml` for your
 
 Variable        | Type        | Description
 --------        | ----        | -----------
-apt_pkg         | List        | List of apt packages to be installed
+`apt_pkg`       | List        | List of apt packages to be installed
 
 ## Tasks
 
