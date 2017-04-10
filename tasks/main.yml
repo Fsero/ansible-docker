@@ -1,4 +1,14 @@
 ---
+- name: 'main | retrieve apt-key'
+  apt_key:
+      url: "{{ docker_repo_key_url }}"
+      id: "{{ docker_repo_key_id }}"
+      
+- name: 'main | setup apt repo'
+  apt_repository:
+      repo: "deb https://apt.dockerproject.org/repo {{ ansible_distribution | lower }}-{{ ansible_distribution_release }} main"
+      state: present
+
 - name: main | install docker packages
   apt:
     pkg: "{{ item }}"
