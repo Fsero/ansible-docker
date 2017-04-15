@@ -6,9 +6,23 @@
       
 - name: 'main | setup apt repo'
   apt_repository:
-      repo: "deb https://apt.dockerproject.org/repo {{ ansible_distribution | lower }}-{{ ansible_distribution_release }} main"
-      state: present
+    repo: "deb [arch=amd64] https://download.docker.com/linux/debian \
+           {{ ansible_distribution_release }} \
+           stable"
+    state: present
 
+- name: 'main | disable old docker apt repo'
+  apt_repository:
+    repo: "deb https://apt.dockerproject.org/repo {{ ansible_distribution | lower }}-{{ ansible_distribution_release }} main"
+    state: absent
+
+- name: main | uninstall old docker packages
+  apt:
+    pkg: "{{ item }}"
+    state: 'absent'
+  with_items: "{{ docker_old_pkg }}"
+  notify: stop docker
+  
 - name: main | install docker packages
   apt:
     pkg: "{{ item }}"

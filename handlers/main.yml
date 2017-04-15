@@ -3,3 +3,7 @@
   service:
     name={{ docker_service }}
     state=started
+- name: stop docker
+  service:
+    name={{ docker_service }}
+    state=stopped
